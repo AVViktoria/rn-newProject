@@ -67,8 +67,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
     //  alignItems: "center",
-    // height: 812,
-    // width: 375,
+  
   },
   title: {
     justifyContent: "center",

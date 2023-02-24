@@ -1,24 +1,30 @@
 // import { StatusBar } from "expo-status-bar";
 import {
-  Button,
+ 
   StyleSheet,
   View,
   ImageBackground,
+  Platform,
   Text,
-  TextInput,
+  TextInput, 
+  TouchableOpacity
 } from "react-native";
 
 export default function App() {
+  // console.log(Platform.OS);
   return (
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
         source={require("./assets/Images/bcgRegistrationLg.png")}
       >
-        <View styles={{ marginTop: 33 }}>
-          <Text styles={styles.title}>Registration</Text>
-        </View>
+      
+          
+        
         <View style={styles.form}>
+          
+          <Text style={styles.inputTitle} >Registration</Text>
+
           <View style={{ marginTop: 33 }}>
             <TextInput
               style={styles.input}
@@ -27,6 +33,8 @@ export default function App() {
               placeholderTextColor={"#BDBDBD"}
               backgroundColor={"#F6F6F6"}
             />
+          </View>
+
             <View style={{ marginTop: 16 }}>
               <TextInput
                 style={styles.input}
@@ -36,6 +44,7 @@ export default function App() {
                 backgroundColor={"#F6F6F6"}
               />
             </View>
+
             <View style={{ marginTop: 16 }}>
               <TextInput
                 style={styles.input}
@@ -46,8 +55,11 @@ export default function App() {
                 secureTextEntry={true}
               />
             </View>
-          </View>
-          <Button title = "Create account"/>
+
+            <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
+              <Text style={styles.btnTitle}>SIGN IN</Text>
+            </TouchableOpacity>
+            <Text style={styles.enterLogin} >Уже есть аккаунт? Войти</Text>
         </View>
         {/* <StatusBar style="auto" /> */}
       </ImageBackground>
@@ -65,16 +77,22 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
+    // justifyContent: "center",
+    justifyContent: "flex-end"
     //  alignItems: "center",
   
   },
-  title: {
+  inputTitle: {
+    
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
+    marginTop: 33,
     fontSize: 30,
-    fontWeight: 500,
+    // weight: 500,
+    fontWeight: "500",
+// marginLeft:  "calc(50% - 184px/2 + 0.5px)",
+    // fontWeight: 500,
     color: "#212121",
   },
   form: {},
@@ -93,6 +111,32 @@ const styles = StyleSheet.create({
 
     color: "#212121",
   },
+
+   btn: {
+    backgroundColor: "#FF6C00",
+    height: 51,
+    borderRadius: 100,
+    marginTop: 43,
+    // marginBottom: 113,
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 16,
+    // paddingVertical: 16,
+    // paddingHorizontal: 50,
+  },
+  btnTitle: {
+    color: "#FFFFFF",
+    fontSize: 16,
+  },
+  enterLogin:{
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    marginTop: 16,
+    marginBottom: 78,
+    fontSize: 16,
+    color: "#1B4371",
+  }
 });
 
 // import React, { useState, useEffect } from "react";

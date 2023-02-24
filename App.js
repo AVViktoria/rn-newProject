@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+// import { StatusBar } from "expo-status-bar";
 import {
   Button,
   StyleSheet,
@@ -49,7 +49,7 @@ export default function App() {
           </View>
           <Button title = "Create account"/>
         </View>
-        <StatusBar style="auto" />
+        {/* <StatusBar style="auto" /> */}
       </ImageBackground>
     </View>
   );

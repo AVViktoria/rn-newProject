@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as Font from 'expo-font';
 
 import {
   StyleSheet,
@@ -18,6 +19,14 @@ const initialState = {
   email: "",
   password: "",
 };
+const loadApplication = async()=>{
+await Font.loadAsync({
+'Roboto-Regular': require("./assets/fonts/roboto/Roboto-Regular.ttf")
+
+})
+
+}
+
 
 export default function App() {
   // console.log(Platform.OS);
@@ -27,6 +36,8 @@ export default function App() {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+    console.log(state);
+    setState(initialState)
   };
 
   return (
@@ -61,7 +72,9 @@ export default function App() {
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.login}
                   onChangeText = {(value)=>setState((prevState)=>({...prevState, login:value}))}
+                
                 />
               </View>
 
@@ -73,6 +86,7 @@ export default function App() {
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
                   onChangeText = {(value)=>setState((prevState)=>({...prevState, email:value}))}
                 />
               </View>
@@ -86,6 +100,7 @@ export default function App() {
                   backgroundColor={"#F6F6F6"}
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.password}
                   onChangeText = {(value)=>setState((prevState)=>({...prevState, password:value}))}
                 />
               </View>

@@ -24,7 +24,7 @@ export default function LoginScreen() {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state)
+    setState(initialState);
   };
 
   return (
@@ -59,6 +59,7 @@ export default function LoginScreen() {
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
                   onChangeText = {(value)=>setState((prevState)=>({...prevState, email:value}))}
                 />
               </View>
@@ -72,6 +73,7 @@ export default function LoginScreen() {
                   backgroundColor={"#F6F6F6"}
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.password}
                   onChangeText = {(value)=>setState((prevState)=>({...prevState, password:value}))}
                 />
               </View>

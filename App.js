@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-// import * as Font from 'expo-font';
+import * as Font from 'expo-font';
+import { AppLoading } from "expo";
 
 import {
   StyleSheet,
@@ -19,19 +20,20 @@ const initialState = {
   email: "",
   password: "",
 };
-// const loadApplication = async()=>{
-// await Font.loadAsync({
-// 'Roboto-Regular': require("./assets/fonts/roboto/Roboto-Regular.ttf")
-
-// })
-
-// }
+const loadApplication = async()=>{
+await Font.loadAsync({
+'Roboto-Regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
+'Roboto-Medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
+'Roboto-Bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
+});
+};
 
 
 export default function App() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+  const [isReady, setIsReady] = useState(false);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -40,7 +42,18 @@ export default function App() {
     setState(initialState)
   };
 
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    );
+  }
   return (
+
+    
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
@@ -152,7 +165,8 @@ const styles = StyleSheet.create({
   },
   formTitle: {
     fontSize: 30,
-    fontWeight: "500",
+    fontFamily: "Roboto-Medium",
+    // fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",
   },
@@ -166,6 +180,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginHorizontal: 16,
     color: "#212121",
+    fontFamily: "Roboto-Regular",
   },
 
   btn: {

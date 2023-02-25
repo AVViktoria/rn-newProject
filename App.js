@@ -5,8 +5,10 @@ import {
   StyleSheet,
   View,
   ImageBackground,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
+  TouchableWithoutFeedback,
   Text,
   TextInput,
   TouchableOpacity,
@@ -15,19 +17,28 @@ import {
 export default function App() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
         style={styles.image}
         source={require("./assets/Images/bcgRegistrationLg.png")}
       >
-        <View style={styles.cover}>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
             <View
-              style={{ ...styles.form, marginBottom: isShowKeyboard ? 43 : 78 }}
+              style={{
+                ...styles.form,
+                marginBottom: isShowKeyboard ? -172 : null,
+              }}
             >
               <Text style={styles.inputTitle}>Registration</Text>
 
@@ -64,14 +75,20 @@ export default function App() {
                   onFocus={() => setIsShowKeyboard(true)}
                 />
               </View>
+
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.btn}
+                onPress={keyboardHide}
+              >
+                <Text style={styles.btnTitle}>SIGN IN</Text>
+              </TouchableOpacity>
+
+              <Text style={styles.enterLogin}>Уже есть аккаунт? Войти</Text>
             </View>
-         
+          </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
-        <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
-          <Text style={styles.btnTitle}>SIGN IN</Text>
-        </TouchableOpacity>
-        <Text style={styles.enterLogin}>Уже есть аккаунт? Войти</Text>
-       </View></ImageBackground>
+      </ImageBackground>
     </View>
   );
 }
@@ -90,24 +107,26 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     //  alignItems: "center",
   },
-  cover: {
-    backgroundColor: "#FFFFFF",
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
-    // border-radius: 25px 25px 0px 0px;
-    // marginTop: 263,
-  },
   inputTitle: {
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    marginTop:92,
+    marginTop: 92,
     fontSize: 30,
     fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",
   },
-  form: {},
+  form: {
+    position: "relative",
+    minHeight: 549,
+    backgroundColor: "#FFFFFF",
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    // border-radius: 25px 25px 0px 0px;
+    // marginTop: 263,
+    // marginBottom: 15,
+  },
 
   input: {
     borderWidth: 1,
@@ -128,7 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF6C00",
     height: 51,
     borderRadius: 100,
-    // marginTop: 43,
+    marginTop: 43,
     // marginBottom: 113,
     justifyContent: "center",
     alignItems: "center",

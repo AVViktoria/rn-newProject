@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import * as Font from 'expo-font';
-import { AppLoading } from "expo";
+// import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
 
 
 import {
@@ -22,6 +24,9 @@ const initialState = {
   password: "",
 };
 
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
@@ -37,15 +42,17 @@ export default function App() {
 
   const loadApplication = async()=>{
     await Font.loadAsync({
-    'roboto-regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
-    'roboto-medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
-    'roboto-bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
+    'Roboto-Regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
+    'Roboto-Medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
+    'Roboto-Bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
     });
     };
 
 
   if (!isReady) {
-    return (
+    // SplashScreen.hideAsync()
+    return (      
+      SplashScreen.hideAsync(),
       <AppLoading
         startAsync={loadApplication}
         onFinish={() => setIsReady(true)}
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
   },
   formTitle: {
     fontSize: 30,
-    // fontFamily: "Roboto-Medium",
+    fontFamily: "Roboto-Medium",
     // fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",
@@ -182,7 +189,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginHorizontal: 16,
     color: "#212121",
-    fontFamily: "roboto-regular",
+    fontFamily: "Roboto-Regular",
   },
 
   btn: {
@@ -197,6 +204,7 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
+    fontFamily: 'Roboto-Regular',
   },
   bottomSignLogin: {
     justifyContent: "center",
@@ -205,6 +213,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 78,
     fontSize: 16,
+    fontFamily: 'Roboto-Regular',
     color: "#1B4371",
   },
 });

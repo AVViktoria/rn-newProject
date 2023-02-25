@@ -19,13 +19,9 @@ const initialState = {
   email: "",
   password: "",
 };
-const loadApplication = async()=>{
-await Font.loadAsync({
-'Roboto-Regular': require("./assets/fonts/roboto/Roboto-Regular.ttf")
+// 
 
-})
 
-}
 
 
 export default function App() {

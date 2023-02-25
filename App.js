@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import * as Font from 'expo-font';
-import { AppLoading } from "expo";
+// import * as Font from 'expo-font';
+// import { AppLoading } from "expo";
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 import {
   StyleSheet,
@@ -20,14 +22,17 @@ const initialState = {
   email: "",
   password: "",
 };
-const loadApplication = async()=>{
-await Font.loadAsync({
-'Roboto-Regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
-'Roboto-Medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
-'Roboto-Bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
-});
-};
+// const loadApplication = async()=>{
+// await Font.loadAsync({
+// 'RobotoRegular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
+// 'RobotoMedium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
+// 'RobotoBold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
+// });
+// };
 
+
+
+ 
 
 export default function App() {
   // console.log(Platform.OS);
@@ -42,15 +47,24 @@ export default function App() {
     setState(initialState)
   };
 
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
-        onError={console.warn}
-      />
-    );
+
+  let [fontsLoaded] = useFonts({
+    'Roboto-Regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
+ 'Roboto-Medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
+ 'Roboto-Bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
+   });
+  if (!fontsLoaded) {
+    return <AppLoading />;
   }
+  // if (!isReady) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={loadApplication}
+  //       onFinish={() => setIsReady(true)}
+  //       onError={console.warn}
+  //     />
+  //   );
+  // }
   return (
 
     
@@ -165,7 +179,7 @@ const styles = StyleSheet.create({
   },
   formTitle: {
     fontSize: 30,
-    fontFamily: "Roboto-Medium",
+    // fontFamily: "Roboto-Medium",
     // fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",

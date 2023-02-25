@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import * as Font from 'expo-font';
-// import { AppLoading } from "expo";
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
+import { AppLoading } from "expo";
+
 
 import {
   StyleSheet,
@@ -22,17 +21,6 @@ const initialState = {
   email: "",
   password: "",
 };
-// const loadApplication = async()=>{
-// await Font.loadAsync({
-// 'RobotoRegular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
-// 'RobotoMedium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
-// 'RobotoBold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
-// });
-// };
-
-
-
- 
 
 export default function App() {
   // console.log(Platform.OS);
@@ -47,15 +35,14 @@ export default function App() {
     setState(initialState)
   };
 
+  const loadApplication = async()=>{
+    await Font.loadAsync({
+    'roboto-regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
+    'roboto-medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
+    'roboto-bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
+    });
+    };
 
-  const [fontsLoaded] = useFonts({
-    'roboto-regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
- 'roboto-medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
- 'roboto-bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
-   });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
 
   if (!isReady) {
     return (
@@ -195,7 +182,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginHorizontal: 16,
     color: "#212121",
-    fontFamily: "Roboto-Regular",
+    fontFamily: "roboto-regular",
   },
 
   btn: {
@@ -421,3 +408,19 @@ const styles = StyleSheet.create({
 //     </NavigationContainer>
 //   );
 // }
+
+
+
+// *   fonts
+// import { useFonts } from 'expo-font';
+// import AppLoading from 'expo-app-loading';
+
+
+//   const [fontsLoaded] = useFonts({
+//     'roboto-regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
+//  'roboto-medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
+//  'roboto-bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
+//    });
+//   if (!fontsLoaded) {
+//     return <AppLoading />;
+//   }

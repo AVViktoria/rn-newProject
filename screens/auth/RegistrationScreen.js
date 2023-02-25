@@ -37,7 +37,7 @@ export default function RegistrationScreen() {
             <View
               style={{
                 ...styles.form,
-                marginBottom: isShowKeyboard ? -70 : null,
+                marginBottom: isShowKeyboard ? -100 : null,
               }}
             >
               {/* -178 */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Font from 'expo-font';
 import { AppLoading } from "expo";
-// import { useFonts } from 'expo-font';
+import { useFonts } from 'expo-font';
 // import AppLoading from 'expo-app-loading';
 
 import {
@@ -22,13 +22,13 @@ const initialState = {
   email: "",
   password: "",
 };
-const loadApplication = async()=>{
-await Font.loadAsync({
-'RobotoRegular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
-'RobotoMedium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
-'RobotoBold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
-});
-};
+// const loadApplication = async()=>{
+// await Font.loadAsync({
+// 'RobotoRegular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
+// 'RobotoMedium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
+// 'RobotoBold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
+// });
+// };
 
 
 
@@ -48,14 +48,14 @@ export default function App() {
   };
 
 
-//   let [fontsLoaded] = useFonts({
-//     'Roboto-Regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
-//  'Roboto-Medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
-//  'Roboto-Bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
-//    });
-//   if (!fontsLoaded) {
-//     return <AppLoading />;
-//   }
+  const [fontsLoaded] = useFonts({
+    'roboto-regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
+ 'roboto-medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
+ 'roboto-bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
+   });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   if (!isReady) {
     return (

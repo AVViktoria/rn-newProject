@@ -1,4 +1,49 @@
-// import { StatusBar } from "expo-status-bar";
+
+// import React from "react";
+// import {
+//   StyleSheet,
+ 
+//   View,
+//   ImageBackground,
+//   TextInput,
+// } from "react-native";
+
+
+// export default function LoginScreen() {
+//   return (
+//     <View style={styles.container}>
+//       <ImageBackground
+//         style={styles.image}
+//         source={require("../../assets/Images/bcgRegistrationLg.png")}
+//       >
+//         <TextInput style={styles.input} textAlign={"center"} />
+//       </ImageBackground>
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//   },
+//   image: {
+//     flex: 1,
+//     resizeMode: "cover",
+//     height: 812,
+//     width: 375,
+//   },
+//   input: {
+//     borderWidth: 1,
+//     borderColor: "#f0f8ff",
+//     height: 40,
+//     borderRadius: 6,
+//     marginHorizontal: 40,
+//     color: "#f0f8ff",
+//   },
+// });
+
+
 import React, { useState } from "react";
 
 import {
@@ -25,6 +70,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
         style={styles.image}
         source={require("./assets/Images/bcgRegistrationLg.png")}
@@ -32,28 +78,21 @@ export default function App() {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          
 
             <View
               style={{
                 ...styles.form,
-                marginBottom: isShowKeyboard ? -172 : null,
+                marginBottom: isShowKeyboard ? -100 : null,
               }}
             >
-              <Text style={styles.inputTitle}>Registration</Text>
+              {/* -178 */}
+              <View style={styles.formHeader}>
+                 <Text style={styles.formTitle}>Sign in</Text>
+              </View>
+              
 
               <View style={{ marginTop: 33 }}>
-                <TextInput
-                  style={styles.input}
-                  enum={"solid"}
-                  placeholder={"Login"}
-                  placeholderTextColor={"#BDBDBD"}
-                  backgroundColor={"#F6F6F6"}
-                  onFocus={() => setIsShowKeyboard(true)}
-                />
-              </View>
-
-              <View style={{ marginTop: 16 }}>
                 <TextInput
                   style={styles.input}
                   enum={"solid"}
@@ -84,11 +123,12 @@ export default function App() {
                 <Text style={styles.btnTitle}>SIGN IN</Text>
               </TouchableOpacity>
 
-              <Text style={styles.enterLogin}>Уже есть аккаунт? Войти</Text>
+              <Text style={styles.bottomSignLogin}>No account? Sign in</Text>
             </View>
-          </TouchableWithoutFeedback>
+
         </KeyboardAvoidingView>
       </ImageBackground>
+      </TouchableWithoutFeedback>
     </View>
   );
 }
@@ -103,44 +143,39 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    // justifyContent: "center",
     justifyContent: "flex-end",
-    //  alignItems: "center",
   },
-  inputTitle: {
+ 
+  form: {
+    position: "relative",
+    minHeight: 489,
+    backgroundColor: "#FFFFFF",
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+  },
+
+  formHeader: {
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    marginTop: 92,
+    marginTop: 32,
+  },
+  formTitle: {
     fontSize: 30,
     fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",
   },
-  form: {
-    position: "relative",
-    minHeight: 549,
-    backgroundColor: "#FFFFFF",
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
-    // border-radius: 25px 25px 0px 0px;
-    // marginTop: 263,
-    // marginBottom: 15,
-  },
-
   input: {
     borderWidth: 1,
-
     borderColor: "#E8E8E8",
     borderRadius: 8,
-
     height: 50,
     paddingLeft: 16,
     paddingTop: 16,
     paddingBottom: 15,
     marginHorizontal: 16,
-
-    color: "#212121",
+    color: "#F6F6F6",
   },
 
   btn: {
@@ -148,23 +183,21 @@ const styles = StyleSheet.create({
     height: 51,
     borderRadius: 100,
     marginTop: 43,
-    // marginBottom: 113,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 16,
-    // paddingVertical: 16,
-    // paddingHorizontal: 50,
+
   },
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
   },
-  enterLogin: {
+  bottomSignLogin: {
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     marginTop: 16,
-    marginBottom: 78,
+    marginBottom: 144,
     fontSize: 16,
     color: "#1B4371",
   },

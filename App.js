@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Font from 'expo-font';
 // import { AppLoading } from "expo";
 import AppLoading from 'expo-app-loading';
 import * as SplashScreen from 'expo-splash-screen';
+// import * as ScreenOrientation from 'expo-screen-orientation';
+
 
 
 import {
+  // Dimensions,
   StyleSheet,
   View,
   ImageBackground,
@@ -26,12 +29,31 @@ const initialState = {
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
+// ScreenOrientation.unlockAsync();
 
 export default function App() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [isReady, setIsReady] = useState(false);
+
+  //* вызываем для перерендера компонента при переворачивании экрана
+  // const [dimensions, setDimensions] = useState(
+  //   Dimensions.get("window").width
+  // );
+
+  // useEffect(() => {
+  //   const onChange = () => {
+  //     const width = Dimensions.get("window").width;
+
+  //     setDimensions(width);
+  //   };
+  //   Dimensions.addEventListener("change", onChange);
+  //   return () => {
+  //     Dimensions.removeEventListener("change", onChange);
+  //   };
+  // }, []);
+
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -78,6 +100,7 @@ export default function App() {
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -100 : null,
+                // width: dimensions,
               }}
             >
 
@@ -164,6 +187,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
+    // marginHorizontal: 16,
   },
 
   formHeader: {

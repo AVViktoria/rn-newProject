@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import * as Font from 'expo-font';
+import * as Font from "expo-font";
 // import { AppLoading } from "expo";
-import AppLoading from 'expo-app-loading';
-import * as SplashScreen from 'expo-splash-screen';
-import * as ScreenOrientation from 'expo-screen-orientation';
+import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 import {
   Dimensions,
   StyleSheet,
-  View,Image,
+  View,
+  Image,
   ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
@@ -33,98 +34,84 @@ export default function RegistrationScreen() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [isReady, setIsReady] = useState(false);
 
-  //* вызываем для перерендера компонента при переворачивании экрана
-  const [dimensions, setDimensions] = useState(
-    Dimensions.get("window").width
-  );
+  //   //* вызываем для перерендера компонента при переворачивании экрана
+  //   const [dimensions, setDimensions] = useState(
+  //     Dimensions.get("window").width
+  //   );
 
-  useEffect(() => {
-    const onChange = () => {
-      const width = Dimensions.get("window").width;
+  //   useEffect(() => {
+  //     const onChange = () => {
+  //       const width = Dimensions.get("window").width;
 
-      setDimensions(width);
-    };
-    Dimensions.addEventListener("change", onChange);
-    return () => {
-      Dimensions.removeEventListener("change", onChange);
-    };
-  }, []);
-//*                                                       ******//
+  //       setDimensions(width);
+  //     };
+  //     Dimensions.addEventListener("change", onChange);
+  //     return () => {
+  //       Dimensions.removeEventListener("change", onChange);
+  //     };
+  //   }, []);
+  // //*                                                       ******//
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
     console.log(state);
-    setState(initialState)
+    setState(initialState);
   };
 
-  const loadApplication = async()=>{
+  const loadApplication = async () => {
     await Font.loadAsync({
-    'Roboto-Regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
-    'Roboto-Medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
-    'Roboto-Bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
+      "Roboto-Regular": require("./assets/fonts/roboto/Roboto-Regular.ttf"),
+      "Roboto-Medium": require("./assets/fonts/roboto/Roboto-Medium.ttf"),
+      "Roboto-Bold": require("./assets/fonts/roboto/Roboto-Bold.ttf"),
     });
-    };
-
+  };
 
   if (!isReady) {
     // SplashScreen.hideAsync()
-    return (      
+    return (
       SplashScreen.hideAsync(),
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
-        onError={console.warn}
-      />
+      (
+        <AppLoading
+          startAsync={loadApplication}
+          onFinish={() => setIsReady(true)}
+          onError={console.warn}
+        />
+      )
     );
   }
   return (
-
-    
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
-      <ImageBackground
-        style={styles.image}
-        source={require("./assets/Images/bcgRegistrationLg.png")}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <ImageBackground
+          style={styles.image}
+          source={require("./assets/Images/bcgRegistrationLg.png")}
         >
-          
-
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
             <View
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -100 : null,
-                width: dimensions,
-
+                // width: dimensions,
               }}
             >
-<View style= {styles.imageBcg}>
-  <Image
-  style={{ width: 120, height: 120, resizeMode: 'contain', }}
-  // source={{
-  //   uri: '',
-  // }}
-  />
-</View>
-              
-        
-              
-
-
-{/* <View>
-        <Image 
-          style={{ width: 100, height: 100 }}
-          source={{uri: 'https://www.positronx.io/wp-content/uploads/2020/02/react-native-150x150-1.jpg'}}
-        />
-      </View> */}
-              <View style={styles.formHeader}>
-                 <Text style={styles.formTitle}>Registration</Text>
+              <View style={styles.imageBcg}>
+                <Image
+                  style={{ width: 120, height: 120, resizeMode: "contain" }}
+                  // source={{
+                  //   uri: '',
+                  // }}
+                />
               </View>
-              
+
+              <View style={styles.formHeader}>
+                <Text style={styles.formTitle}>Registration</Text>
+              </View>
 
               <View style={{ marginTop: 33 }}>
                 <TextInput
@@ -135,8 +122,9 @@ export default function RegistrationScreen() {
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.login}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, login:value}))}
-                
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, login: value }))
+                  }
                 />
               </View>
 
@@ -149,7 +137,9 @@ export default function RegistrationScreen() {
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, email:value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
                 />
               </View>
 
@@ -161,11 +151,46 @@ export default function RegistrationScreen() {
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
                   secureTextEntry={true}
+                  icon={
+                    <TouchableOpacity
+                      onPress={() => {
+                        setIsSecureEntry((prev) => !prev);
+                      }}>
+                      <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+                    </TouchableOpacity>
+                  }
+                  iconPosition="right"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, password:value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, password: value }))
+                  }
                 />
               </View>
+
+              {/* <Input
+            label="Password"
+            placeholder="Enter Password"
+            secureTextEntry={isSecureEntry}
+            icon={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry((prev) => !prev);
+                }}>
+                <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+              </TouchableOpacity>
+            }
+            iconPosition="right"
+            error={errors.password || error?.password?.[0]}
+            onChangeText={(value) => {
+              onChange({name: 'password', value});
+            }}
+          /> */}
+
+
+
+
+
 
               <TouchableOpacity
                 activeOpacity={0.8}
@@ -175,11 +200,12 @@ export default function RegistrationScreen() {
                 <Text style={styles.btnTitle}>SIGN IN</Text>
               </TouchableOpacity>
 
-              <Text style={styles.bottomSignLogin}>Уже есть аккаунт? Войти</Text>
+              <Text style={styles.bottomSignLogin}>
+                Уже есть аккаунт? Войти
+              </Text>
             </View>
-
-        </KeyboardAvoidingView>
-      </ImageBackground>
+          </KeyboardAvoidingView>
+        </ImageBackground>
       </TouchableWithoutFeedback>
     </View>
   );
@@ -197,27 +223,27 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
- 
+
   form: {
     position: "relative",
     minHeight: 549,
     zIndex: 1,
-    
+
     backgroundColor: "#FFFFFF",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
     // marginHorizontal: 16,
   },
-imageBcg:{
-  zIndex: 10,
-  position: "absolute",
-  alignItems: "center",
-  // justifyContent: "center",
-  top: -60,
-  left: 188,
-  backgroundColor: "#F6F6F6",
-  borderRadius: 16,
-},
+  imageBcg: {
+    zIndex: 10,
+    position: "absolute",
+    alignItems: "center",
+    // justifyContent: "center",
+    top: -60,
+    left: 158,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+  },
   formHeader: {
     justifyContent: "center",
     alignItems: "center",
@@ -243,7 +269,6 @@ imageBcg:{
     fontSize: 16,
     fontFamily: "Roboto-Regular",
     color: "#212121",
-    
   },
 
   btn: {
@@ -258,7 +283,7 @@ imageBcg:{
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
   },
   bottomSignLogin: {
     justifyContent: "center",
@@ -267,7 +292,7 @@ imageBcg:{
     marginTop: 16,
     marginBottom: 78,
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     color: "#1B4371",
   },
 });

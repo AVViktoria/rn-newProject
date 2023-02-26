@@ -8,6 +8,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 
 
 import {
+  Image, 
   Dimensions,
   StyleSheet,
   View,

@@ -8,7 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
 
 import {
-  // Dimensions,
+  Dimensions,
   StyleSheet,
   View,
   ImageBackground,
@@ -38,21 +38,21 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
 
   //* вызываем для перерендера компонента при переворачивании экрана
-  // const [dimensions, setDimensions] = useState(
-  //   Dimensions.get("window").width
-  // );
+  const [dimensions, setDimensions] = useState(
+    Dimensions.get("window").width
+  );
 
-  // useEffect(() => {
-  //   const onChange = () => {
-  //     const width = Dimensions.get("window").width;
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get("window").width;
 
-  //     setDimensions(width);
-  //   };
-  //   Dimensions.addEventListener("change", onChange);
-  //   return () => {
-  //     Dimensions.removeEventListener("change", onChange);
-  //   };
-  // }, []);
+      setDimensions(width);
+    };
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  }, []);
 
 
   const keyboardHide = () => {
@@ -100,7 +100,7 @@ export default function App() {
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -100 : null,
-                // width: dimensions,
+                width: dimensions,
               }}
             >
 

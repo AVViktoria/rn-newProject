@@ -103,7 +103,14 @@ export default function RegistrationScreen() {
                 width: dimensions,
               }}
             >
-
+<View style={styles.imageBcg}>
+                <Image
+                  style={{ width: 120, height: 120, resizeMode: "contain" }}
+                  // source={{
+                  //   uri: '',
+                  // }}
+                />
+              </View>
               <View style={styles.formHeader}>
                  <Text style={styles.formTitle}>Registration</Text>
               </View>
@@ -189,7 +196,16 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     // marginHorizontal: 16,
   },
-
+  imageBcg: {
+    zIndex: 10,
+    position: "absolute",
+    alignItems: "center",
+    // justifyContent: "center",
+    top: -60,
+    left: 158,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+  },
   formHeader: {
     justifyContent: "center",
     alignItems: "center",

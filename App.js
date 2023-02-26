@@ -214,7 +214,7 @@ imageBcg:{
   alignItems: "center",
   // justifyContent: "center",
   top: -60,
-  left: 128,
+  left: 188,
   backgroundColor: "#F6F6F6",
   borderRadius: 16,
 },

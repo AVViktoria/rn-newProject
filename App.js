@@ -7,6 +7,7 @@ import * as ScreenOrientation from "expo-screen-orientation";
 
 import {
   Dimensions,
+  Icon,
   StyleSheet,
   View,
   Image,
@@ -34,7 +35,8 @@ export default function RegistrationScreen() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [isSecureEntry, setIsSecureEntry] = useState(true);
+  // const [isSecureEntry, setIsSecureEntry] = useState(true);
+  const [passwordVisible, setPasswordVisible] = useState(true);
   const [isReady, setIsReady] = useState(false);
 
   //   //* вызываем для перерендера компонента при переворачивании экрана
@@ -150,16 +152,18 @@ export default function RegistrationScreen() {
                   placeholder={"Password"}
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
-                  secureTextEntry={true}
-                  icon={
-                    <TouchableOpacity
-                      onPress={() => {
-                        setIsSecureEntry((prev) => !prev);
-                      }}>
-                      <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
-                    </TouchableOpacity>
-                  }
-                  iconPosition="right"
+                  secureTextEntry={isSecureEntry}
+                  right={<TextInput.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} />}
+                  // icon={
+                    
+                  //   <TouchableOpacity
+                  //     onPress={() => {
+                  //       setIsSecureEntry((prev) => !prev);
+                  //     }}>
+                  //     <Text style={styles.icon}>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+                  //   </TouchableOpacity>
+                  // }
+                  // iconPosition="right"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
                   onChangeText={(value) =>
@@ -167,31 +171,6 @@ export default function RegistrationScreen() {
                   }
                 />
               </View>
-
-              {/* <Input
-            label="Password"
-            placeholder="Enter Password"
-            secureTextEntry={isSecureEntry}
-            icon={
-              <TouchableOpacity
-                onPress={() => {
-                  setIsSecureEntry((prev) => !prev);
-                }}>
-                <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
-              </TouchableOpacity>
-            }
-            iconPosition="right"
-            error={errors.password || error?.password?.[0]}
-            onChangeText={(value) => {
-              onChange({name: 'password', value});
-            }}
-          /> */}
-
-
-
-
-
-
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.btn}
@@ -270,7 +249,12 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     color: "#212121",
   },
+icon:{
+  fontSize: 16,
+  fontFamily: "Roboto-Regular",
+  color: "#212121",
 
+},
   btn: {
     backgroundColor: "#FF6C00",
     height: 51,

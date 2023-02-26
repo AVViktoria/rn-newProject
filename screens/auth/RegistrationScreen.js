@@ -3,7 +3,7 @@ import * as Font from 'expo-font';
 // import { AppLoading } from "expo";
 import AppLoading from 'expo-app-loading';
 import * as SplashScreen from 'expo-splash-screen';
-// import * as ScreenOrientation from 'expo-screen-orientation';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 
 
@@ -29,7 +29,7 @@ const initialState = {
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
-// ScreenOrientation.unlockAsync();
+ScreenOrientation.unlockAsync();
 
 export default function App() {
   // console.log(Platform.OS);
@@ -53,7 +53,7 @@ export default function App() {
       Dimensions.removeEventListener("change", onChange);
     };
   }, []);
-
+//*                                                       ******//
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);

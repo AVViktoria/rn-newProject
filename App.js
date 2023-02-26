@@ -8,7 +8,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import {
   Dimensions,
   StyleSheet,
-  View,
+  View,Image,
   ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
@@ -99,12 +99,20 @@ export default function RegistrationScreen() {
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -100 : null,
                 width: dimensions,
+
               }}
             >
-
+<View style= {styles.imageBcg}>
+  <Image
+  style={{ width: 120, height: 120, resizeMode: 'contain', }}
+  // source={{
+  //   uri: '',
+  // }}
+  />
+</View>
               
         
-              <View><View/>
+              
 
 
 {/* <View>
@@ -193,12 +201,22 @@ const styles = StyleSheet.create({
   form: {
     position: "relative",
     minHeight: 549,
+    zIndex: 1,
+    
     backgroundColor: "#FFFFFF",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
     // marginHorizontal: 16,
   },
-
+imageBcg:{
+  zIndex: 10,
+  position: "absolute",
+  alignItems: "center",
+  justifyContent: "center",
+  top: -60,
+  backgroundColor: "#F6F6F6",
+  borderRadius: 16,
+},
   formHeader: {
     justifyContent: "center",
     alignItems: "center",

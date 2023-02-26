@@ -7,7 +7,7 @@ import * as ScreenOrientation from "expo-screen-orientation";
 
 import {
   Dimensions,
-  Icon,
+  // Icon,
   StyleSheet,
   View,
   Image,
@@ -35,26 +35,26 @@ export default function RegistrationScreen() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  // const [isSecureEntry, setIsSecureEntry] = useState(true);
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [isReady, setIsReady] = useState(false);
 
   //   //* вызываем для перерендера компонента при переворачивании экрана
-  //   const [dimensions, setDimensions] = useState(
-  //     Dimensions.get("window").width
-  //   );
+    const [dimensions, setDimensions] = useState(
+      Dimensions.get("window").width
+    );
 
-  //   useEffect(() => {
-  //     const onChange = () => {
-  //       const width = Dimensions.get("window").width;
+    useEffect(() => {
+      const onChange = () => {
+        const width = Dimensions.get("window").width;
 
-  //       setDimensions(width);
-  //     };
-  //     Dimensions.addEventListener("change", onChange);
-  //     return () => {
-  //       Dimensions.removeEventListener("change", onChange);
-  //     };
-  //   }, []);
+        setDimensions(width);
+      };
+      Dimensions.addEventListener("change", onChange);
+      return () => {
+        Dimensions.removeEventListener("change", onChange);
+      };
+    }, []);
   // //*                                                       ******//
 
   const keyboardHide = () => {
@@ -99,7 +99,7 @@ export default function RegistrationScreen() {
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -100 : null,
-                // width: dimensions,
+                width: dimensions,
               }}
             >
               <View style={styles.imageBcg}>
@@ -152,17 +152,17 @@ export default function RegistrationScreen() {
                   placeholder={"Password"}
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
-                  secureTextEntry={isSecureEntry}
-                  right={<TextInput.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} />}
-                  // icon={
+                  secureTextEntry={true}
+                  // right={<TextInput.Icon name={passwordVisible ? 'Show' : 'Hide'} onPress={() => setPasswordVisible(!passwordVisible)} />}
+                  icon={
                     
-                  //   <TouchableOpacity
-                  //     onPress={() => {
-                  //       setIsSecureEntry((prev) => !prev);
-                  //     }}>
-                  //     <Text style={styles.icon}>{isSecureEntry ? 'Show' : 'Hide'}</Text>
-                  //   </TouchableOpacity>
-                  // }
+                    <TouchableOpacity
+                      onPress={() => {
+                        setIsSecureEntry((prev) => !prev);
+                      }}>
+                      <Text style={styles.icon}>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+                    </TouchableOpacity>
+                  }
                   // iconPosition="right"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
@@ -251,6 +251,7 @@ const styles = StyleSheet.create({
   },
 icon:{
   fontSize: 16,
+  alignItems: "right", 
   fontFamily: "Roboto-Regular",
   color: "#212121",
 

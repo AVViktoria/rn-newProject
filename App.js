@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as Font from 'expo-font';
 // import { AppLoading } from "expo";
 import AppLoading from 'expo-app-loading';
 import * as SplashScreen from 'expo-splash-screen';
-// import * as ScreenOrientation from 'expo-screen-orientation';
-
-
 
 import {
   Dimensions,
@@ -22,16 +19,11 @@ import {
 } from "react-native";
 
 const initialState = {
-  login: "",
   email: "",
   password: "",
 };
-
-// Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
-// ScreenOrientation.unlockAsync();
-
-export default function App() {
+export default function LoginScreen() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
@@ -53,7 +45,6 @@ export default function App() {
       Dimensions.removeEventListener("change", onChange);
     };
   }, []);
-
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -83,8 +74,6 @@ export default function App() {
     );
   }
   return (
-
-    
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
@@ -99,31 +88,17 @@ export default function App() {
             <View
               style={{
                 ...styles.form,
-                marginBottom: isShowKeyboard ? -100 : null,
+                marginBottom: isShowKeyboard ? -160 : null,
                 width: dimensions,
               }}
             >
 
               <View style={styles.formHeader}>
-                 <Text style={styles.formTitle}>Registration</Text>
+                 <Text style={styles.formTitle}>Sign in</Text>
               </View>
               
 
               <View style={{ marginTop: 33 }}>
-                <TextInput
-                  style={styles.input}
-                  enum={"solid"}
-                  placeholder={"Login"}
-                  placeholderTextColor={"#BDBDBD"}
-                  backgroundColor={"#F6F6F6"}
-                  onFocus={() => setIsShowKeyboard(true)}
-                  value={state.login}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, login:value}))}
-                
-                />
-              </View>
-
-              <View style={{ marginTop: 16 }}>
                 <TextInput
                   style={styles.input}
                   enum={"solid"}
@@ -158,7 +133,7 @@ export default function App() {
                 <Text style={styles.btnTitle}>SIGN IN</Text>
               </TouchableOpacity>
 
-              <Text style={styles.bottomSignLogin}>Уже есть аккаунт? Войти</Text>
+              <Text style={styles.bottomSignLogin}>No account? Sign in</Text>
             </View>
 
         </KeyboardAvoidingView>
@@ -183,22 +158,21 @@ const styles = StyleSheet.create({
  
   form: {
     position: "relative",
-    minHeight: 549,
+    minHeight: 489,
     backgroundColor: "#FFFFFF",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
-    // marginHorizontal: 16,
   },
 
   formHeader: {
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    marginTop: 92,
+    marginTop: 32,
   },
   formTitle: {
     fontSize: 30,
-    fontFamily: "Roboto-Medium",
+    fontFamily: 'Roboto-Medium',
     // fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",
@@ -213,9 +187,8 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginHorizontal: 16,
     fontSize: 16,
-    fontFamily: "Roboto-Regular",
+    fontFamily: 'Roboto-Regular',
     color: "#212121",
-    
   },
 
   btn: {
@@ -226,6 +199,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 16,
+
   },
   btnTitle: {
     color: "#FFFFFF",
@@ -237,7 +211,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     marginTop: 16,
-    marginBottom: 78,
+    marginBottom: 144,
     fontSize: 16,
     fontFamily: 'Roboto-Regular',
     color: "#1B4371",

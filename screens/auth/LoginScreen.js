@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Font from 'expo-font';
 // import { AppLoading } from "expo";
 import AppLoading from 'expo-app-loading';
 import * as SplashScreen from 'expo-splash-screen';
+// import * as ScreenOrientation from 'expo-screen-orientation';
 
 import {
+  Dimensions,
   StyleSheet,
   View,
   ImageBackground,
@@ -22,11 +24,36 @@ const initialState = {
   password: "",
 };
 SplashScreen.preventAutoHideAsync();
+// ScreenOrientation.unlockAsync();
+
 export default function LoginScreen() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [isReady, setIsReady] = useState(false);
+
+  //* вызываем для перерендера компонента при переворачивании экрана
+  const [dimensions, setDimensions] = useState(
+    Dimensions.get("window").width,
+    // Dimensions.get("window").height,
+  );
+
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get("window").width;
+      // const height = Dimensions.get("window").height;
+      setDimensions(width);
+      // setDimensions(height);
+    };
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  }, []);
+//*                                                       ******//
+
+
+
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -71,6 +98,8 @@ export default function LoginScreen() {
               style={{
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -160 : null,
+                width: dimensions,
+                // height: dimensions,
               }}
             >
 

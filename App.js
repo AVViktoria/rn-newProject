@@ -99,7 +99,7 @@ export default function App() {
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -160 : null,
                 width: dimensions,
-                height: dimensions,
+                // height: dimensions,
               }}
             >
 

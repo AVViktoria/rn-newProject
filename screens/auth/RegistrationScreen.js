@@ -103,7 +103,12 @@ export default function RegistrationScreen() {
                 width: dimensions,
               }}
             >
-
+{/* <View>
+        <Image 
+          style={{ width: 100, height: 100 }}
+          source={{uri: 'https://www.positronx.io/wp-content/uploads/2020/02/react-native-150x150-1.jpg'}}
+        />
+      </View> */}
               <View style={styles.formHeader}>
                  <Text style={styles.formTitle}>Registration</Text>
               </View>

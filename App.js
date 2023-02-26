@@ -188,8 +188,10 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 15,
     marginHorizontal: 16,
-    color: "#212121",
+    fontSize: 16,
     fontFamily: "Roboto-Regular",
+    color: "#212121",
+    
   },
 
   btn: {

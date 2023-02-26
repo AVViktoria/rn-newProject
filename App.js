@@ -31,17 +31,12 @@ const initialState = {
 SplashScreen.preventAutoHideAsync();
 ScreenOrientation.unlockAsync();
 
-export default function RegistrationScreen() {
+export default function App() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [isReady, setIsReady] = useState(false);
-  //*       1
-  // const [passwordVisible, setPasswordVisible] = useState(true);
-
-  //*       2
-  // const [isSecureEntry, setIsSecureEntry] = useState(true);
-  //*       2
+  
   const [hidePass, setHidePass] = useState(true);
 
   //   //* вызываем для перерендера компонента при переворачивании экрана
@@ -79,13 +74,11 @@ export default function RegistrationScreen() {
     // SplashScreen.hideAsync()
     return (
       SplashScreen.hideAsync(),
-      (
         <AppLoading
           startAsync={loadApplication}
           onFinish={() => setIsReady(true)}
           onError={console.warn}
         />
-      )
     );
   }
   return (
@@ -142,16 +135,11 @@ export default function RegistrationScreen() {
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
-                  secureTextEntry={hidePass ? true : false}
+                  
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
-                  }
-                >
-                  <Icon
-                    name={hidePass ? "eye-slash" : "eye"}
-                    onPress={() => setHidePass(!hidePass)}
-                  />
-                </TextInput>
+                  }/>
+                
               </View>
 
               <View style={{ marginTop: 16 }}>
@@ -161,13 +149,20 @@ export default function RegistrationScreen() {
                   placeholder={"Password"}
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
-                  secureTextEntry={true}
+                  // secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
+                  secureTextEntry={hidePass ? true : false}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, password: value }))
                   }
-                />
+                  
+                  >
+                  <Icon
+                    name={hidePass ? "eye-slash" : "eye"}
+                    onPress={() => setHidePass(!hidePass)}
+                  />
+                </TextInput>
               </View>
 
               <TouchableOpacity
@@ -279,6 +274,14 @@ const styles = StyleSheet.create({
     color: "#1B4371",
   },
 });
+
+//*       1
+  // const [passwordVisible, setPasswordVisible] = useState(true);
+
+  //*       2
+  // const [isSecureEntry, setIsSecureEntry] = useState(true);
+  //*             
+
 
 //*       1
 // right={<TextInput.Icon name={passwordVisible ? 'Show' : 'Hide'} onPress={() => setPasswordVisible(!passwordVisible)} />}

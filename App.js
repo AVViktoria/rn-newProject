@@ -7,7 +7,7 @@ import * as ScreenOrientation from "expo-screen-orientation";
 
 import {
   Dimensions,
-  // Icon,
+  Icon,
   StyleSheet,
   View,
   Image,
@@ -35,26 +35,29 @@ export default function RegistrationScreen() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [isSecureEntry, setIsSecureEntry] = useState(true);
-  const [passwordVisible, setPasswordVisible] = useState(true);
   const [isReady, setIsReady] = useState(false);
+  //*       1
+  // const [passwordVisible, setPasswordVisible] = useState(true);
+
+  //*       2
+  // const [isSecureEntry, setIsSecureEntry] = useState(true);
+  //*       2
+  const [hidePass, setHidePass] = useState(true);
 
   //   //* вызываем для перерендера компонента при переворачивании экрана
-    const [dimensions, setDimensions] = useState(
-      Dimensions.get("window").width
-    );
+  const [dimensions, setDimensions] = useState(Dimensions.get("window").width);
 
-    useEffect(() => {
-      const onChange = () => {
-        const width = Dimensions.get("window").width;
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get("window").width;
 
-        setDimensions(width);
-      };
-      Dimensions.addEventListener("change", onChange);
-      return () => {
-        Dimensions.removeEventListener("change", onChange);
-      };
-    }, []);
+      setDimensions(width);
+    };
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  }, []);
   // //*                                                       ******//
 
   const keyboardHide = () => {
@@ -139,10 +142,16 @@ export default function RegistrationScreen() {
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
+                  secureTextEntry={hidePass ? true : false}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
                   }
-                />
+                >
+                  <Icon
+                    name={hidePass ? "eye-slash" : "eye"}
+                    onPress={() => setHidePass(!hidePass)}
+                  />
+                </TextInput>
               </View>
 
               <View style={{ marginTop: 16 }}>
@@ -153,17 +162,6 @@ export default function RegistrationScreen() {
                   placeholderTextColor={"#BDBDBD"}
                   backgroundColor={"#F6F6F6"}
                   secureTextEntry={true}
-                  // right={<TextInput.Icon name={passwordVisible ? 'Show' : 'Hide'} onPress={() => setPasswordVisible(!passwordVisible)} />}
-                  icon={
-                    
-                    <TouchableOpacity
-                      onPress={() => {
-                        setIsSecureEntry((prev) => !prev);
-                      }}>
-                      <Text style={styles.icon}>{isSecureEntry ? 'Show' : 'Hide'}</Text>
-                    </TouchableOpacity>
-                  }
-                  // iconPosition="right"
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
                   onChangeText={(value) =>
@@ -171,6 +169,7 @@ export default function RegistrationScreen() {
                   }
                 />
               </View>
+
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.btn}
@@ -249,13 +248,12 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     color: "#212121",
   },
-icon:{
-  fontSize: 16,
-  alignItems: "right", 
-  fontFamily: "Roboto-Regular",
-  color: "#212121",
-
-},
+  icon: {
+    fontSize: 16,
+    alignItems: "right",
+    fontFamily: "Roboto-Regular",
+    color: "#212121",
+  },
   btn: {
     backgroundColor: "#FF6C00",
     height: 51,
@@ -281,3 +279,19 @@ icon:{
     color: "#1B4371",
   },
 });
+
+//*       1
+// right={<TextInput.Icon name={passwordVisible ? 'Show' : 'Hide'} onPress={() => setPasswordVisible(!passwordVisible)} />}
+//*       2
+// icon={
+
+//   <TouchableOpacity
+//     onPress={() => {
+//       setIsSecureEntry((prev) => !prev);
+//     }}>
+//     <Text style={styles.icon}>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+//   </TouchableOpacity>
+// }
+// iconPosition="right"
+
+// secureTextEntry={hidePass ? true : false}>

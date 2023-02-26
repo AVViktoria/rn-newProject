@@ -23,7 +23,9 @@ const initialState = {
   password: "",
 };
 SplashScreen.preventAutoHideAsync();
-export default function LoginScreen() {
+// ScreenOrientation.unlockAsync();
+
+export default function App() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
@@ -45,6 +47,10 @@ export default function LoginScreen() {
       Dimensions.removeEventListener("change", onChange);
     };
   }, []);
+//*                                                       ******//
+
+
+
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);

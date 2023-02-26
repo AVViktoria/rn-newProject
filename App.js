@@ -3,7 +3,7 @@ import * as Font from 'expo-font';
 // import { AppLoading } from "expo";
 import AppLoading from 'expo-app-loading';
 import * as SplashScreen from 'expo-splash-screen';
-import * as ScreenOrientation from 'expo-screen-orientation';
+// import * as ScreenOrientation from 'expo-screen-orientation';
 
 import {
   Dimensions,
@@ -24,7 +24,7 @@ const initialState = {
   password: "",
 };
 SplashScreen.preventAutoHideAsync();
-ScreenOrientation.unlockAsync();
+// ScreenOrientation.unlockAsync();
 
 export default function App() {
   // console.log(Platform.OS);

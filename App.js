@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import * as Font from 'expo-font';
+// import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
+
 
 import {
   StyleSheet,
@@ -19,15 +23,15 @@ const initialState = {
   email: "",
   password: "",
 };
-// 
 
-
-
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+  const [isReady, setIsReady] = useState(false);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -36,7 +40,29 @@ export default function App() {
     setState(initialState)
   };
 
+  const loadApplication = async()=>{
+    await Font.loadAsync({
+    'Roboto-Regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
+    'Roboto-Medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
+    'Roboto-Bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
+    });
+    };
+
+
+  if (!isReady) {
+    // SplashScreen.hideAsync()
+    return (      
+      SplashScreen.hideAsync(),
+      <AppLoading
+        startAsync={loadApplication}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
+    );
+  }
   return (
+
+    
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
@@ -148,7 +174,8 @@ const styles = StyleSheet.create({
   },
   formTitle: {
     fontSize: 30,
-    fontWeight: "500",
+    fontFamily: "Roboto-Medium",
+    // fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",
   },
@@ -161,7 +188,10 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 15,
     marginHorizontal: 16,
+    fontSize: 16,
+    fontFamily: "Roboto-Regular",
     color: "#212121",
+    
   },
 
   btn: {
@@ -176,6 +206,7 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
+    fontFamily: 'Roboto-Regular',
   },
   bottomSignLogin: {
     justifyContent: "center",
@@ -184,6 +215,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 78,
     fontSize: 16,
+    fontFamily: 'Roboto-Regular',
     color: "#1B4371",
   },
 });
@@ -387,3 +419,19 @@ const styles = StyleSheet.create({
 //     </NavigationContainer>
 //   );
 // }
+
+
+
+// *   fonts
+// import { useFonts } from 'expo-font';
+// import AppLoading from 'expo-app-loading';
+
+
+//   const [fontsLoaded] = useFonts({
+//     'roboto-regular': require("./assets/fonts/roboto/Roboto-Regular.ttf"),
+//  'roboto-medium': require("./assets/fonts/roboto/Roboto-Medium.ttf"),
+//  'roboto-bold': require("./assets/fonts/roboto/Roboto-Bold.ttf")
+//    });
+//   if (!fontsLoaded) {
+//     return <AppLoading />;
+//   }

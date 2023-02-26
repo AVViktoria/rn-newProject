@@ -3,6 +3,7 @@ import * as Font from 'expo-font';
 // import { AppLoading } from "expo";
 import AppLoading from 'expo-app-loading';
 import * as SplashScreen from 'expo-splash-screen';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 import {
   Dimensions,
@@ -23,7 +24,7 @@ const initialState = {
   password: "",
 };
 SplashScreen.preventAutoHideAsync();
-// ScreenOrientation.unlockAsync();
+ScreenOrientation.unlockAsync();
 
 export default function App() {
   // console.log(Platform.OS);
@@ -33,14 +34,16 @@ export default function App() {
 
   //* вызываем для перерендера компонента при переворачивании экрана
   const [dimensions, setDimensions] = useState(
-    Dimensions.get("window").width
+    Dimensions.get("window").width,
+    // Dimensions.get("window").height,
   );
 
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get("window").width;
-
+      // const height = Dimensions.get("window").height;
       setDimensions(width);
+      // setDimensions(height);
     };
     Dimensions.addEventListener("change", onChange);
     return () => {
@@ -96,6 +99,7 @@ export default function App() {
                 ...styles.form,
                 marginBottom: isShowKeyboard ? -160 : null,
                 width: dimensions,
+                height: dimensions,
               }}
             >
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import AppLoading from "expo-app-loading";
 //        Navigation
-import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //        Fonts
 import * as Font from "expo-font";
 
@@ -20,6 +20,7 @@ SplashScreen.preventAutoHideAsync();
 ScreenOrientation.unlockAsync();
 
 const AuthStack = createStackNavigator();
+const MainStack = createBottomTabNavigator();
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);

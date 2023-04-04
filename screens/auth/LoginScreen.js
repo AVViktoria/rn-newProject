@@ -26,7 +26,7 @@ const initialState = {
 // SplashScreen.preventAutoHideAsync();
 // ScreenOrientation.unlockAsync();
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
@@ -138,8 +138,11 @@ export default function LoginScreen() {
               >
                 <Text style={styles.btnTitle}>SIGN IN</Text>
               </TouchableOpacity>
-
-              <Text style={styles.bottomSignLogin}>No account? Sign in</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                <Text style={styles.bottomSignLogin}>
+                  Don't have an account? Sign up
+                </Text>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>

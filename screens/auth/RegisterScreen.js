@@ -30,7 +30,7 @@ const initialState = {
 SplashScreen.preventAutoHideAsync();
 ScreenOrientation.unlockAsync();
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ navigation }) {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
@@ -144,9 +144,11 @@ export default function RegisterScreen() {
                 <Text style={styles.btnTitle}>SIGN UP</Text>
               </TouchableOpacity>
 
-              <Text style={styles.bottomSignLogin}>
-                Уже есть аккаунт? Войти
-              </Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.bottomSignLogin}>
+                  Already have an account? Log in
+                </Text>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -227,7 +229,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Roboto-Regular",
   },
+
   bottomSignLogin: {
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",

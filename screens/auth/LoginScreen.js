@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import * as Font from 'expo-font';
+// import * as Font from "expo-font";
 // import { AppLoading } from "expo";
-import AppLoading from 'expo-app-loading';
-import * as SplashScreen from 'expo-splash-screen';
+// import AppLoading from "expo-app-loading";
+// import * as SplashScreen from "expo-splash-screen";
 // import * as ScreenOrientation from 'expo-screen-orientation';
 
 import {
@@ -23,18 +23,18 @@ const initialState = {
   email: "",
   password: "",
 };
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 // ScreenOrientation.unlockAsync();
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [isReady, setIsReady] = useState(false);
+  // const [isReady, setIsReady] = useState(false);
 
   //* вызываем для перерендера компонента при переворачивании экрана
   const [dimensions, setDimensions] = useState(
-    Dimensions.get("window").width,
+    Dimensions.get("window").width
     // Dimensions.get("window").height,
   );
 
@@ -50,50 +50,44 @@ export default function LoginScreen() {
       Dimensions.removeEventListener("change", onChange);
     };
   }, []);
-//*                                                       ******//
-
-
-
+  //*                                                       ******//
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
     console.log(state);
-    setState(initialState)
+    setState(initialState);
   };
 
-  const loadApplication = async()=>{
-    await Font.loadAsync({
-    'Roboto-Regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
-    'Roboto-Medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
-    'Roboto-Bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
-    });
-    };
+  // const loadApplication = async()=>{
+  //   await Font.loadAsync({
+  //   'Roboto-Regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
+  //   'Roboto-Medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
+  //   'Roboto-Bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
+  //   });
+  //   };
 
-
-  if (!isReady) {
-    // SplashScreen.hideAsync()
-    return (      
-      SplashScreen.hideAsync(),
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
-        onError={console.warn}
-      />
-    );
-  }
+  // if (!isReady) {
+  //   // SplashScreen.hideAsync()
+  //   return (
+  //     SplashScreen.hideAsync(),
+  //     <AppLoading
+  //       startAsync={loadApplication}
+  //       onFinish={() => setIsReady(true)}
+  //       onError={console.warn}
+  //     />
+  //   );
+  // }
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
-      <ImageBackground
-        style={styles.image}
-        source={require("./assets/Images/bcgRegistrationLg.png")}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <ImageBackground
+          style={styles.image}
+          source={require("../../assets/Images/bcgRegistrationLg.png")}
         >
-          
-
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
             <View
               style={{
                 ...styles.form,
@@ -102,11 +96,9 @@ export default function LoginScreen() {
                 // height: dimensions,
               }}
             >
-
               <View style={styles.formHeader}>
-                 <Text style={styles.formTitle}>Sign in</Text>
+                <Text style={styles.formTitle}>Sign in</Text>
               </View>
-              
 
               <View style={{ marginTop: 33 }}>
                 <TextInput
@@ -117,7 +109,9 @@ export default function LoginScreen() {
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, email:value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
                 />
               </View>
 
@@ -131,7 +125,9 @@ export default function LoginScreen() {
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, password:value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, password: value }))
+                  }
                 />
               </View>
 
@@ -142,12 +138,14 @@ export default function LoginScreen() {
               >
                 <Text style={styles.btnTitle}>SIGN IN</Text>
               </TouchableOpacity>
-
-              <Text style={styles.bottomSignLogin}>No account? Sign in</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                <Text style={styles.bottomSignLogin}>
+                  Don't have an account? Sign up
+                </Text>
+              </TouchableOpacity>
             </View>
-
-        </KeyboardAvoidingView>
-      </ImageBackground>
+          </KeyboardAvoidingView>
+        </ImageBackground>
       </TouchableWithoutFeedback>
     </View>
   );
@@ -165,7 +163,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
- 
+
   form: {
     position: "relative",
     minHeight: 489,
@@ -182,7 +180,7 @@ const styles = StyleSheet.create({
   },
   formTitle: {
     fontSize: 30,
-    fontFamily: 'Roboto-Medium',
+    fontFamily: "Roboto-Medium",
     // fontWeight: "500",
     // marginLeft:  "calc(50% - 184px/2 + 0.5px)",
     color: "#212121",
@@ -197,7 +195,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginHorizontal: 16,
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     color: "#212121",
   },
 
@@ -209,12 +207,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 16,
-
   },
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
   },
   bottomSignLogin: {
     justifyContent: "center",
@@ -223,7 +220,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 144,
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     color: "#1B4371",
   },
 });

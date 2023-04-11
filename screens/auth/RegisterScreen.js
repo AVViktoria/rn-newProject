@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import * as Font from 'expo-font';
+// import * as Font from "expo-font";
 // import { AppLoading } from "expo";
-import AppLoading from 'expo-app-loading';
-import * as SplashScreen from 'expo-splash-screen';
-import * as ScreenOrientation from 'expo-screen-orientation';
-
-
+// import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 import {
+  Image,
   Dimensions,
   StyleSheet,
   View,
@@ -31,71 +30,47 @@ const initialState = {
 SplashScreen.preventAutoHideAsync();
 ScreenOrientation.unlockAsync();
 
-export default function RegistrationScreen() {
+export default function RegisterScreen({ navigation }) {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [isReady, setIsReady] = useState(false);
+  // const [isReady, setIsReady] = useState(false);
 
   //* вызываем для перерендера компонента при переворачивании экрана
-  const [dimensions, setDimensions] = useState(
-    Dimensions.get("window").width
-  );
+  const [dimensions, setDimensions] = useState(Dimensions.get("window").width);
+  // , Dimensions.get("window").height
 
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get("window").width;
-
+      // const height = Dimensions.get("window").height;
       setDimensions(width);
+      // setDimensions(height);
     };
     Dimensions.addEventListener("change", onChange);
     return () => {
       Dimensions.removeEventListener("change", onChange);
     };
   }, []);
-//*                                                       ******//
+  //*                                                       ******//
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
     console.log(state);
-    setState(initialState)
+    setState(initialState);
   };
 
-  const loadApplication = async()=>{
-    await Font.loadAsync({
-    'Roboto-Regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
-    'Roboto-Medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
-    'Roboto-Bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
-    });
-    };
-
-
-  if (!isReady) {
-    // SplashScreen.hideAsync()
-    return (      
-      SplashScreen.hideAsync(),
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
-        onError={console.warn}
-      />
-    );
-  }
   return (
-
-    
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
-      <ImageBackground
-        style={styles.image}
-        source={require("./assets/Images/bcgRegistrationLg.png")}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <ImageBackground
+          style={styles.image}
+          source={require("../../assets/Images/bcgRegistrationLg.png")}
         >
-          
-
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
             <View
               style={{
                 ...styles.form,
@@ -103,7 +78,7 @@ export default function RegistrationScreen() {
                 width: dimensions,
               }}
             >
-<View style={styles.imageBcg}>
+              <View style={styles.imageBcg}>
                 <Image
                   style={{ width: 120, height: 120, resizeMode: "contain" }}
                   // source={{
@@ -112,9 +87,8 @@ export default function RegistrationScreen() {
                 />
               </View>
               <View style={styles.formHeader}>
-                 <Text style={styles.formTitle}>Registration</Text>
+                <Text style={styles.formTitle}>Registration</Text>
               </View>
-              
 
               <View style={{ marginTop: 33 }}>
                 <TextInput
@@ -125,8 +99,9 @@ export default function RegistrationScreen() {
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.login}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, login:value}))}
-                
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, login: value }))
+                  }
                 />
               </View>
 
@@ -139,7 +114,9 @@ export default function RegistrationScreen() {
                   backgroundColor={"#F6F6F6"}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, email:value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
                 />
               </View>
 
@@ -153,7 +130,9 @@ export default function RegistrationScreen() {
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.password}
-                  onChangeText = {(value)=>setState((prevState)=>({...prevState, password:value}))}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, password: value }))
+                  }
                 />
               </View>
 
@@ -162,14 +141,17 @@ export default function RegistrationScreen() {
                 style={styles.btn}
                 onPress={keyboardHide}
               >
-                <Text style={styles.btnTitle}>SIGN IN</Text>
+                <Text style={styles.btnTitle}>SIGN UP</Text>
               </TouchableOpacity>
 
-              <Text style={styles.bottomSignLogin}>Уже есть аккаунт? Войти</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.bottomSignLogin}>
+                  Already have an account? Log in
+                </Text>
+              </TouchableOpacity>
             </View>
-
-        </KeyboardAvoidingView>
-      </ImageBackground>
+          </KeyboardAvoidingView>
+        </ImageBackground>
       </TouchableWithoutFeedback>
     </View>
   );
@@ -187,7 +169,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
- 
+
   form: {
     position: "relative",
     minHeight: 549,
@@ -231,7 +213,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Roboto-Regular",
     color: "#212121",
-    
   },
 
   btn: {
@@ -246,16 +227,18 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
   },
+
   bottomSignLogin: {
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     marginTop: 16,
     marginBottom: 78,
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: "Roboto-Regular",
     color: "#1B4371",
   },
 });

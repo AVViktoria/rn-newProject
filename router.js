@@ -12,6 +12,9 @@ import PostsScreen from "./screens/main/PostsScreen";
 import ProfileScreen from "./screens/main/ProfileScreen";
 import CreateScreen from "./screens/main/CreateScreen";
 
+//   user, plus and grid-icons
+import { Feather } from "@expo/vector-icons";
+
 export const useRoute = (isAuth) => {
   if (!isAuth) {
     return (
@@ -37,10 +40,10 @@ export const useRoute = (isAuth) => {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <View style={styles.iconImg}>
-              <Image
-                source={require("./assets/icons/grid.png")}
-                size={size}
-                color={color}
+              <Feather
+                name="grid"
+                size={24}
+                color={focused ? "#fff" : "rgba(33, 33, 33, 0.8)"}
               />
             </View>
           ),
@@ -50,12 +53,13 @@ export const useRoute = (isAuth) => {
         name="Create"
         component={CreateScreen}
         options={{
+          headerTitleAlign: "center",
           tabBarIcon: ({ focused, color, size }) => (
             <View style={styles.iconPlus}>
-              <Image
-                source={require("./assets/icons/union.png")}
-                size={size}
-                color={color}
+              <Feather
+                name="plus"
+                size={24}
+                color={focused ? "#fff" : "rgba(33, 33, 33, 0.8)"}
               />
             </View>
           ),
@@ -67,10 +71,10 @@ export const useRoute = (isAuth) => {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <View style={styles.iconImg}>
-              <Image
-                source={require("./assets/icons/user.png")}
-                size={size}
-                color={color}
+              <Feather
+                name="user"
+                size={24}
+                color={focused ? "#fff" : "rgba(33, 33, 33, 0.8)"}
               />
             </View>
           ),
@@ -81,16 +85,17 @@ export const useRoute = (isAuth) => {
 };
 const styles = StyleSheet.create({
   iconImg: {
-    width: 24,
-    height: 24,
+    width: 40,
+    height: 40,
+    padding: 8,
   },
   iconPlus: {
-    width: 13,
-    height: 13,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#FF6C00",
     borderRadius: 20,
-    // padding: "13.5 28.5 13.5 28.5",
-    // width: 70,
-    // height: 40,
+    width: 70,
+    height: 40,
+    // color: "rgba(33, 33, 33, 0.8)",
   },
 });

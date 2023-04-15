@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 70,
     height: 40,
+
     // color: "rgba(33, 33, 33, 0.8)",
   },
 });

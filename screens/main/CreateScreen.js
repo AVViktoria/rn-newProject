@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
+import * as Location from "expo-location";
 
 const CreateScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState(null);
+  // const [location, setLocation] = useState(null);
 
   const takePhoto = async () => {
     const photoFn = await camera.takePictureAsync();
+    // const location = await Location.getCurrentPositionAsync();
     setPhoto(photoFn.uri);
-    console.log(photoFn.uri);
+    console.log(photo);
+    // console.log(location);
   };
   const sendPhoto = async () => {
-    //  const photoFn = await camera.takePictureAsync();
-    //  setPhoto(photoFn.uri);
-    console.log("navigation");
+    // console.log("navigation");
     navigation.navigate("Posts", { photo });
   };
+
+  // const location = await Location.getCurrentPositionAsync({});
+  //       setLocation(location);
+  //     })();
+  //   }, []);
   return (
     <View style={styles.container}>
       <Camera style={styles.camera} ref={setCamera}>
@@ -34,9 +41,9 @@ const CreateScreen = ({ navigation }) => {
           <Ionicons name="camera-sharp" size={24} color="#BDBDBD" />
         </TouchableOpacity>
       </Camera>
-      <TouchableOpacity onPress={takePhoto}>
+      {/* <TouchableOpacity onPress={takePhoto}>
         <Text style={styles.loadText}>Load picture</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.btn}
@@ -87,9 +94,9 @@ const styles = StyleSheet.create({
   //   marginTop: 32,
   //   marginHorizontal: 16,
   //   borderRadius: 8,
-  //   width: 343,
+  //   // width: 343,
   //   contentFit: "cover",
-  //   height: 240,
+  //   height: 400,
   //   justifyContent: "center",
   //   alignItems: "center",
   // },

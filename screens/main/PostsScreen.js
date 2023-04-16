@@ -28,19 +28,19 @@ const PostScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 240,
     marginTop: 32,
     marginHorizontal: 16,
-    justifyContent: "center",
   },
   loadedPhotoBox: {
+    // position: "relative",
+    display: "flex",
+    flexStart: "top",
     flexDirection: "row",
-    // width: "100%",
+    width: "100%",
     marginBottom: 8,
     height: 240,
   },
   loadedPhoto: {
-    alignSelf: "center",
     width: "100%",
     height: "100%",
     borderRadius: 8,

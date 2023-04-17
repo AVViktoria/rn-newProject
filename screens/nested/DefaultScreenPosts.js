@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, Image } from "react-native";
+import { View, Button, StyleSheet, FlatList, Image } from "react-native";
 
-const PostScreen = ({ route }) => {
+const DefaultScreenPosts = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
   // console.log(route);
   useEffect(() => {
@@ -20,6 +20,11 @@ const PostScreen = ({ route }) => {
             <Image source={{ uri: item.photo }} style={styles.loadedPhoto} />
           </View>
         )}
+      />
+      <Button title="go to map" onPress={() => navigation.navigate("Map")} />
+      <Button
+        title="go to Comments"
+        onPress={() => navigation.navigate("Comments")}
       />
     </View>
   );
@@ -47,4 +52,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PostScreen;
+// import React from "react";
+// import { View, Text, StyleSheet } from "react-native";
+
+// const DefaultScreen = () => (
+//   <View style={styles.container}>
+//     <Text>DefaultScreen</Text>
+//   </View>
+// );
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+// });
+
+export default DefaultScreenPosts;

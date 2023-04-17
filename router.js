@@ -8,8 +8,8 @@ const MainTab = createBottomTabNavigator();
 //     Components
 import LoginScreen from "./screens/auth/LoginScreen";
 import RegisterScreen from "./screens/auth/RegisterScreen";
-import PostsScreen from "./screens/main/PostsScreen";
 import ProfileScreen from "./screens/main/ProfileScreen";
+import HomeScreen from "./screens/main/HomeScreen";
 import CreateScreen from "./screens/main/CreateScreen";
 
 //   user, plus and grid-icons
@@ -35,8 +35,8 @@ export const useRoute = (isAuth) => {
   return (
     <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
       <MainTab.Screen
-        name="Posts"
-        component={PostsScreen}
+        name="Profile"
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <View style={styles.iconImg}>
@@ -66,8 +66,8 @@ export const useRoute = (isAuth) => {
         }}
       />
       <MainTab.Screen
-        name="Profile"
-        component={ProfileScreen}
+        name="Home"
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <View style={styles.iconImg}>

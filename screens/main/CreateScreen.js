@@ -3,28 +3,59 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
 import * as Location from "expo-location";
+import * as MediaLibrary from "expo-media-library";
 
 const CreateScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
-  // const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [permission, setPermission] = Camera.useCameraPermissions();
+
+  //    Location permission
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      await MediaLibrary.requestPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  //    Camera permission
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      await MediaLibrary.requestPermissionsAsync();
+      setPermission(status === "granted");
+    })();
+  }, []);
+
+  if (permission === null) {
+    return <View />;
+  }
+  if (permission === false) {
+    return <Text>No access to camera</Text>;
+  }
 
   const takePhoto = async () => {
     const photoFn = await camera.takePictureAsync();
-    // const location = await Location.getCurrentPositionAsync();
+    const location = await Location.getCurrentPositionAsync();
+    console.log("latitude", location.coords.latitude);
+    console.log("longitude", location.coords.longitude);
+
     setPhoto(photoFn.uri);
-    console.log(photo);
-    // console.log(location);
-  };
-  const sendPhoto = async () => {
-    // console.log("navigation");
-    navigation.navigate("Posts", { photo });
+    console.log("photo", photo);
   };
 
-  // const location = await Location.getCurrentPositionAsync({});
-  //       setLocation(location);
-  //     })();
-  //   }, []);
+  const sendPhoto = () => {
+    console.log("navigation", navigation);
+    navigation.navigate("DefaultScreen", { photo });
+  };
+
   return (
     <View style={styles.container}>
       <Camera style={styles.camera} ref={setCamera}>
@@ -33,7 +64,6 @@ const CreateScreen = ({ navigation }) => {
             <Image
               source={{ uri: photo }}
               style={{ width: "100%", height: "100%", borderRadius: 8 }}
-              // style={styles.takePhoto}
             />
           </View>
         )}

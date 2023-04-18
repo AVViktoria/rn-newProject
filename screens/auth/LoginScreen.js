@@ -1,10 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import * as Font from "expo-font";
-// import { AppLoading } from "expo";
-// import AppLoading from "expo-app-loading";
-// import * as SplashScreen from "expo-splash-screen";
-// import * as ScreenOrientation from 'expo-screen-orientation';
-
 import {
   Dimensions,
   StyleSheet,
@@ -27,7 +21,6 @@ const initialState = {
 // ScreenOrientation.unlockAsync();
 
 export default function LoginScreen({ navigation }) {
-  // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   // const [isReady, setIsReady] = useState(false);

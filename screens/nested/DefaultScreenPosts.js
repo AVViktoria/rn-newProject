@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, FlatList, Image } from "react-native";
+import { View, Button, StyleSheet, FlatList, Image } from "react-native";
 
-const PostScreen = ({ route }) => {
+const DefaultScreenPosts = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
   // console.log(route);
   useEffect(() => {
@@ -21,6 +21,11 @@ const PostScreen = ({ route }) => {
           </View>
         )}
       />
+      <Button title="go to map" onPress={() => navigation.navigate("Map")} />
+      <Button
+        title="go to Comments"
+        onPress={() => navigation.navigate("Comments")}
+      />
     </View>
   );
 };
@@ -28,23 +33,40 @@ const PostScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 240,
     marginTop: 32,
     marginHorizontal: 16,
-    justifyContent: "center",
   },
   loadedPhotoBox: {
+    // position: "relative",
+    display: "flex",
+    flexStart: "top",
     flexDirection: "row",
-    // width: "100%",
+    width: "100%",
     marginBottom: 8,
     height: 240,
   },
   loadedPhoto: {
-    alignSelf: "center",
     width: "100%",
     height: "100%",
     borderRadius: 8,
   },
 });
 
-export default PostScreen;
+// import React from "react";
+// import { View, Text, StyleSheet } from "react-native";
+
+// const DefaultScreen = () => (
+//   <View style={styles.container}>
+//     <Text>DefaultScreen</Text>
+//   </View>
+// );
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+// });
+
+export default DefaultScreenPosts;

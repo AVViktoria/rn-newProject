@@ -20,7 +20,7 @@ ScreenOrientation.unlockAsync();
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const routing = useRoute(true);
+  const routing = useRoute(false);
   const loadApplication = async () => {
     await Font.loadAsync({
       "Roboto-Regular": require("./assets/fonts/roboto/Roboto-Regular.ttf"),

@@ -19,7 +19,8 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-
+import { useDispatch } from "react-redux";
+import { authSignOutUser } from "../../redux/auth/authOperation";
 const initialState = {
   login: "",
   email: "",
@@ -34,6 +35,8 @@ export default function RegisterScreen({ navigation }) {
   // console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+
+  const dispatch = useDispatch();
   // const [isReady, setIsReady] = useState(false);
 
   //* вызываем для перерендера компонента при переворачивании экрана
@@ -54,16 +57,17 @@ export default function RegisterScreen({ navigation }) {
   }, []);
   //*                                                       ******//
 
-  const keyboardHide = () => {
+  const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
     console.log(state);
+    dispatch(authSignOutUser(state));
     setState(initialState);
   };
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={keyboardHide}>
+      <TouchableWithoutFeedback onPress={handleSubmit}>
         <ImageBackground
           style={styles.image}
           source={require("../../assets/Images/bcgRegistrationLg.png")}
@@ -139,7 +143,7 @@ export default function RegisterScreen({ navigation }) {
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.btn}
-                onPress={keyboardHide}
+                onPress={handleSubmit}
               >
                 <Text style={styles.btnTitle}>SIGN UP</Text>
               </TouchableOpacity>

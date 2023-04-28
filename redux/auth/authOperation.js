@@ -23,20 +23,22 @@
 //       console.log("error.message", error.message);
 //     }
 //   };
-export const authSignUpUser = () => async (dispatch, getState) => {
-  // const { email, password } = inputState;
-  try {
-    // await auth.signInWithEmailAndPassword("email", "password");
-    // await createUserWithEmailAndPassword(auth, email, password);
-    // await updateProfile(auth.currentUser, {
-    //   displayName: inputState.login,
-    // });
-    // const user = auth.currentUser;
-    // console.log(user);
-  } catch (error) {
-    throw error;
-  }
-};
+export const authSignUpUser = () =>
+  // async (dispatch, getState) =>
+  {
+    // const { email, password } = inputState;
+    try {
+      // await auth.signInWithEmailAndPassword("email", "password");
+      // await createUserWithEmailAndPassword(auth, email, password);
+      // await updateProfile(auth.currentUser, {
+      //   displayName: inputState.login,
+      // });
+      // const user = auth.currentUser;
+      // console.log(user);
+    } catch (error) {
+      throw error;
+    }
+  };
 export const authSignInUser =
   () =>
   async ({ dispatch, getState }) => {

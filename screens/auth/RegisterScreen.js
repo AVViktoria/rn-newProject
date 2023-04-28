@@ -57,10 +57,11 @@ export default function RegisterScreen({ navigation }) {
   }, []);
   //*                                                       ******//
 
+  //  send input-form
   const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+
     dispatch(authSignOutUser(state));
     setState(initialState);
   };

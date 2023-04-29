@@ -45,35 +45,20 @@ export default function LoginScreen({ navigation }) {
   }, []);
   //*                                                       ******//
 
-  const keyboardHide = () => {
+  const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+    console.log("submit", state);
     setState(initialState);
   };
 
-  // const loadApplication = async()=>{
-  //   await Font.loadAsync({
-  //   'Roboto-Regular': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
-  //   'Roboto-Medium': require('./assets/fonts/roboto/Roboto-Medium.ttf'),
-  //   'Roboto-Bold': require('./assets/fonts/roboto/Roboto-Bold.ttf')
-  //   });
-  //   };
-
-  // if (!isReady) {
-  //   // SplashScreen.hideAsync()
-  //   return (
-  //     SplashScreen.hideAsync(),
-  //     <AppLoading
-  //       startAsync={loadApplication}
-  //       onFinish={() => setIsReady(true)}
-  //       onError={console.warn}
-  //     />
-  //   );
-  // }
+  const keyboardHide = () => {
+    Keyboard.dismiss();
+    setIsShowKeyboard(false);
+  };
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={keyboardHide}>
+      <TouchableWithoutFeedback onPress={handleSubmit}>
         <ImageBackground
           style={styles.image}
           source={require("../../assets/Images/bcgRegistrationLg.png")}

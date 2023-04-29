@@ -14,11 +14,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// export default firebase.initializeApp(firebaseConfig);
-
 firebase.initializeApp(firebaseConfig);
+export default firebase;
 
-const auth = firebase.auth();
+// firebase.initializeApp(firebaseConfig);
 
-export { auth };
+// const auth = firebase.auth();
+
+// export { auth };

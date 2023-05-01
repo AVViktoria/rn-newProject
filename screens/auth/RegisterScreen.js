@@ -20,7 +20,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { authSignOutUser } from "../../redux/auth/authOperation";
+import { authSignUpUser } from "../../redux/auth/authOperation";
 const initialState = {
   login: "",
   email: "",
@@ -61,8 +61,8 @@ export default function RegisterScreen({ navigation }) {
   const handleSubmit = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-
-    dispatch(authSignOutUser(state));
+    // console.log(state);
+    dispatch(authSignUpUser(state));
     setState(initialState);
   };
 

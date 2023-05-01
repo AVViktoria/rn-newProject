@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useRoute } from "./router";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+// import { auth } from "./firebase/config";
 
 //    Screen splash orientation
 import * as SplashScreen from "expo-splash-screen";
@@ -20,6 +21,9 @@ ScreenOrientation.unlockAsync();
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
+  // const [user, setUser] = useState(null);
+  // auth().onAuthStateChanged((user) => setUser(user));
+
   const routing = useRoute(false);
   const loadApplication = async () => {
     await Font.loadAsync({

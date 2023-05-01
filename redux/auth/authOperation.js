@@ -1,25 +1,18 @@
-import db from "../../firebase/config";
-
-// import {
-//   createUserWithEmailAndPassword,
-//   // signInWithEmailAndPassword,
-//   // updateProfile,
-//   // signOut,
-//   // onAuthStateChanged,
-// } from "firebase/auth";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
 // import { auth } from "../../firebase/config";
 // import { authSlice } from "./authReducer";
+// import firebase from "../../firebase/config";
 
 export const authSignUpUser =
   ({ login, email, password }) =>
   async (dispatch, getState) => {
     try {
-      const user = await db
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
-      console.log(user);
+      console.log("login, email, password", login, email, password);
+      // const db= await createUserWithEmailAndPassword(auth, email, password);
+      // console.log(bd);
     } catch (error) {
-      throw error;
+      console.log("error", error);
+      console.log("error message", error.message);
     }
   };
 export const authSignInUser =
@@ -44,3 +37,4 @@ export const authSignOutUser =
 // export const authSignUpUser = () => async (dispatch, getState) => {};
 // export const authSignInUser = () => async (dispatch, getState) => {};
 // export const authSignOutUser = () => async (dispatch, getState) => {};
+// export { authSignUpUser, authSignInUser, authSignOutUser };

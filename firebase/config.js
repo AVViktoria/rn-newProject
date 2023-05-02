@@ -1,21 +1,5 @@
-// import firebase from "firebase";
-// import "firebase/auth";
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBGPCIuka_UOVmVTJWhfUsE82RkLzAzYpo",
-//   authDomain: "rn-project-46bde.firebaseapp.com",
-//   projectId: "rn-project-46bde",
-//   storageBucket: "rn-project-46bde.appspot.com",
-//   messagingSenderId: "400356625283",
-//   appId: "1:400356625283:web:9b06768c01c0199210c4b6",
-//   measurementId: "G-FE6MC69ZMZ",
-// };
-
-// export default firebase.initializeApp(firebaseConfig);
 import firebase from "firebase";
 import "firebase/auth";
-import "firebase/storage";
-import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCnzWn5LjnAzkUpC1uOIGhu7QmngIOcjpQ",
@@ -27,6 +11,9 @@ const firebaseConfig = {
   measurementId: "G-9Y1ZFGGG8R",
 };
 
+// export default firebase.initializeApp(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
 
-export default firebase;
+const auth = firebase.auth();
+
+export { auth };
